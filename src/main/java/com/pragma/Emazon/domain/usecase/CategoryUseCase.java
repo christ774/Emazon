@@ -1,8 +1,11 @@
 package com.pragma.Emazon.domain.usecase;
 
+import com.pragma.Emazon.application.dto.CategoryPaginationRequest;
 import com.pragma.Emazon.domain.api.ICategoryServicePort;
 import com.pragma.Emazon.domain.model.Category;
 import com.pragma.Emazon.domain.spi.ICategoryPersistencePort;
+
+import java.util.List;
 
 public class CategoryUseCase implements ICategoryServicePort {
 
@@ -19,4 +22,11 @@ public class CategoryUseCase implements ICategoryServicePort {
         }
         categoryPersistencePort.saveCategory(category);
     }
+
+    @Override
+    public List<Category> getAllCategories(CategoryPaginationRequest categoryPaginationRequest) {
+        return categoryPersistencePort.getAllCategories(categoryPaginationRequest);
+    }
+
+
 }

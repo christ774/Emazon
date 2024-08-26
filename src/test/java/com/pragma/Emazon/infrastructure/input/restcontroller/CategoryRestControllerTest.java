@@ -1,5 +1,7 @@
 package com.pragma.Emazon.infrastructure.input.restcontroller;
 
+import com.pragma.Emazon.application.dto.CategoryListResponse;
+import com.pragma.Emazon.application.dto.CategoryPaginationRequest;
 import com.pragma.Emazon.application.dto.CategoryRequest;
 import com.pragma.Emazon.application.handler.ICategoryHandler;
 import  org.junit.jupiter.api.BeforeEach;
@@ -8,12 +10,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.Collections;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @ExtendWith(MockitoExtension.class)
@@ -40,5 +48,24 @@ public class CategoryRestControllerTest {
                 .andExpect(status().isCreated());
 
         verify(categoryHandler).saveCategory(any(CategoryRequest.class));
+    }
+    @Test
+    void listCategories_shouldReturnOkResponseWithCategoryListResponse() {
+        // Arrange
+        int page = 0;
+        int size = 10;
+        String sortDirection = "ASC";
+        CategoryPaginationRequest expectedRequest = new CategoryPaginationRequest(page, size, sortDirection);
+        CategoryListResponse mockResponse = new CategoryListResponse(Collections.emptyList(), page, size);
+
+        when(categoryHandler.getAllCategories(expectedRequest)).thenReturn(mockResponse);
+
+        // Act
+        ResponseEntity<CategoryListResponse> response = categoryRestController.listCategories(page, size, sortDirection);
+
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(mockResponse, response.getBody());
+        verify(categoryHandler).getAllCategories(expectedRequest);
     }
 }

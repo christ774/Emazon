@@ -1,7 +1,10 @@
 package com.pragma.Emazon.application.handler;
 
+
 import com.pragma.Emazon.application.dto.CategoryRequest;
+
 import com.pragma.Emazon.application.mapper.ICategoryRequestMapper;
+import com.pragma.Emazon.application.mapper.ICategoryResponseMapper;
 import com.pragma.Emazon.domain.api.ICategoryServicePort;
 import com.pragma.Emazon.domain.model.Category;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,19 +12,21 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+
+import static org.mockito.Mockito.*;
 
 public class CategoryHandlerTest {
     @Mock
     private ICategoryServicePort categoryServicePort;
     @Mock private ICategoryRequestMapper categoryRequestMapper;
     private CategoryHandler categoryHandler;
+    @Mock
+    ICategoryResponseMapper categoryResponseMapper;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        categoryHandler = new CategoryHandler(categoryServicePort, categoryRequestMapper);
+        categoryHandler = new CategoryHandler(categoryServicePort, categoryRequestMapper,categoryResponseMapper);
     }
 
     @Test
@@ -34,4 +39,5 @@ public class CategoryHandlerTest {
 
         verify(categoryServicePort).saveCategory(category);
     }
+
 }
