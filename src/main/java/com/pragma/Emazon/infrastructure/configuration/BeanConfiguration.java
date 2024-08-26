@@ -3,13 +3,16 @@ package com.pragma.Emazon.infrastructure.configuration;
 import com.pragma.Emazon.application.handler.CategoryHandler;
 import com.pragma.Emazon.application.handler.ICategoryHandler;
 import com.pragma.Emazon.application.mapper.ICategoryRequestMapper;
+import com.pragma.Emazon.application.mapper.ICategoryResponseMapper;
 import com.pragma.Emazon.domain.api.ICategoryServicePort;
 import com.pragma.Emazon.domain.spi.ICategoryPersistencePort;
 import com.pragma.Emazon.domain.usecase.CategoryUseCase;
 import com.pragma.Emazon.infrastructure.persistente.out.jpa.mysql.adapter.CategoryAdapter;
 import com.pragma.Emazon.infrastructure.persistente.out.jpa.mysql.mapper.ICategoryEntityMapper;
+
 import com.pragma.Emazon.infrastructure.persistente.out.jpa.mysql.repository.ICategoryRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,7 +21,8 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
     private final ICategoryRepository categoryRepository;
     private final ICategoryEntityMapper categoryEntityMapper;
-    //private final ICategoryRequestMapper categoryRequestMapper;
+
+
 
     @Bean
     public ICategoryPersistencePort categoryPersistencePort() {
@@ -31,7 +35,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public ICategoryHandler categoryHandler(ICategoryServicePort categoryServicePort, ICategoryRequestMapper categoryRequestMapper) {
-        return new CategoryHandler(categoryServicePort, categoryRequestMapper);
+    public ICategoryHandler categoryHandler(ICategoryServicePort categoryServicePort, ICategoryRequestMapper categoryRequestMapper,
+                                            ICategoryResponseMapper categoryResponseMapper) {
+        return new CategoryHandler(categoryServicePort, categoryRequestMapper,categoryResponseMapper);
     }
 }
