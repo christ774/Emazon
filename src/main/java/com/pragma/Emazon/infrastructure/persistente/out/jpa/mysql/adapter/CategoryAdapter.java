@@ -38,7 +38,7 @@ public class CategoryAdapter implements ICategoryPersistencePort {
 
         List<CategoryEntity> category = categoryRepository.findAll( pagination).getContent();
         if (category.isEmpty()) {
-            throw new NoDataFoundException();
+            throw new NoDataFoundException("No se encontraron categorías disponibles con los criterios proporcionados.");
         }
         return categoryEntityMapper.toModelList(category);
     }
