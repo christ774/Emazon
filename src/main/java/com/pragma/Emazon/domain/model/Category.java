@@ -7,10 +7,10 @@ public class Category {
     private String description;
 
     public Category(Long id, String name, String description) {
-        if (name == null || name.isEmpty() || name.length() > 50) {
+        if (name == null || name.trim().isEmpty() || name.length() > 50) {
             throw new IllegalArgumentException("El nombre debe ser no nulo, no vacío y de hasta 50 caracteres.");
         }
-        if (description == null || description.isEmpty() || description.length() > 90) {
+        if (description == null || description.trim().isEmpty() || description.length() > 90) {
             throw new IllegalArgumentException("La descripción debe ser no nula, no vacía y de hasta 90 caracteres.");
         }
         this.id = id;
