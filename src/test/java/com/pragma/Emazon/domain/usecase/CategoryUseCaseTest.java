@@ -1,7 +1,7 @@
 package com.pragma.Emazon.domain.usecase;
 
 
-import com.pragma.Emazon.application.dto.CategoryPaginationRequest;
+import com.pragma.Emazon.application.dto.PaginationRequest;
 import com.pragma.Emazon.domain.model.Category;
 import com.pragma.Emazon.domain.spi.ICategoryPersistencePort;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,11 +48,11 @@ public class CategoryUseCaseTest {
         List<Category> categories = Arrays.asList(category1, category2);
 
 
-        when(categoryPersistencePort.getAllCategories(any(CategoryPaginationRequest.class)))
+        when(categoryPersistencePort.getAllCategories(any(PaginationRequest.class)))
                 .thenReturn(categories);
 
 
-        CategoryPaginationRequest request = new CategoryPaginationRequest(0, 10, "ASC");
+        PaginationRequest request = new PaginationRequest(0, 10, "ASC");
 
 
         List<Category> result = categoryUseCase.getAllCategories(request);

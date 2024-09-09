@@ -1,6 +1,6 @@
 package com.pragma.Emazon.domain.usecase;
 
-import com.pragma.Emazon.application.dto.CategoryPaginationRequest;
+import com.pragma.Emazon.application.dto.PaginationRequest;
 import com.pragma.Emazon.domain.api.ICategoryServicePort;
 import com.pragma.Emazon.domain.model.Category;
 import com.pragma.Emazon.domain.spi.ICategoryPersistencePort;
@@ -24,8 +24,8 @@ public class CategoryUseCase implements ICategoryServicePort {
     }
 
     @Override
-    public List<Category> getAllCategories(CategoryPaginationRequest categoryPaginationRequest) {
-        return categoryPersistencePort.getAllCategories(categoryPaginationRequest);
+    public List<Category> getAllCategories(PaginationRequest paginationRequest) {
+        return categoryPersistencePort.getAllCategories(paginationRequest);
     }
 
 
