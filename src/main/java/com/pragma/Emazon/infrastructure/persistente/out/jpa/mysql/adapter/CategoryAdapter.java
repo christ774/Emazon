@@ -1,5 +1,5 @@
 package com.pragma.Emazon.infrastructure.persistente.out.jpa.mysql.adapter;
-import com.pragma.Emazon.application.dto.CategoryPaginationRequest;
+import com.pragma.Emazon.application.dto.PaginationRequest;
 import com.pragma.Emazon.domain.model.Category;
 import com.pragma.Emazon.domain.spi.ICategoryPersistencePort;
 
@@ -32,13 +32,13 @@ public class CategoryAdapter implements ICategoryPersistencePort {
     }
 
     @Override
-    public List<Category> getAllCategories(CategoryPaginationRequest categoryPaginationRequest) {
-        Sort sort = Sort.by(Sort.Direction.fromString(categoryPaginationRequest.sortDirection()), "name");
-        Pageable pagination = PageRequest.of(categoryPaginationRequest.page(), categoryPaginationRequest.size(),sort);
+    public List<Category> getAllCategories(PaginationRequest paginationRequest) {
+        Sort sort = Sort.by(Sort.Direction.fromString(paginationRequest.sortDirection()), "name");
+        Pageable pagination = PageRequest.of(paginationRequest.page(), paginationRequest.size(),sort);
 
         List<CategoryEntity> category = categoryRepository.findAll( pagination).getContent();
         if (category.isEmpty()) {
-            throw new NoDataFoundException("No se encontraron categorías disponibles con los criterios proporcionados.");
+            throw new NoDataFoundException("No se encontraron categorias disponibles con los criterios proporcionados.");
         }
         return categoryEntityMapper.toModelList(category);
     }

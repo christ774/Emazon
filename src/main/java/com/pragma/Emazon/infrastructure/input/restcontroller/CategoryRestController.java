@@ -2,7 +2,7 @@ package com.pragma.Emazon.infrastructure.input.restcontroller;
 
 import com.pragma.Emazon.application.dto.CategoryListResponse;
 import com.pragma.Emazon.application.dto.CategoryRequest;
-import com.pragma.Emazon.application.dto.CategoryPaginationRequest;
+import com.pragma.Emazon.application.dto.PaginationRequest;
 import com.pragma.Emazon.application.handler.ICategoryHandler;
 
 
@@ -29,7 +29,7 @@ public class CategoryRestController {
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "ASC") String sortDirection)
              {
-        CategoryListResponse response = categoryHandler.getAllCategories(new CategoryPaginationRequest(page,size,sortDirection.toUpperCase()));
+        CategoryListResponse response = categoryHandler.getAllCategories(new PaginationRequest(page,size,sortDirection.toUpperCase()));
         return ResponseEntity.ok(response);
     }
 

@@ -1,7 +1,7 @@
 package com.pragma.Emazon.infrastructure.input.restcontroller;
 
 import com.pragma.Emazon.application.dto.CategoryListResponse;
-import com.pragma.Emazon.application.dto.CategoryPaginationRequest;
+import com.pragma.Emazon.application.dto.PaginationRequest;
 import com.pragma.Emazon.application.dto.CategoryRequest;
 import com.pragma.Emazon.application.handler.ICategoryHandler;
 import  org.junit.jupiter.api.BeforeEach;
@@ -55,7 +55,7 @@ public class CategoryRestControllerTest {
         int page = 0;
         int size = 10;
         String sortDirection = "ASC";
-        CategoryPaginationRequest expectedRequest = new CategoryPaginationRequest(page, size, sortDirection);
+        PaginationRequest expectedRequest = new PaginationRequest(page, size, sortDirection);
         CategoryListResponse mockResponse = new CategoryListResponse(Collections.emptyList(), page, size);
 
         when(categoryHandler.getAllCategories(expectedRequest)).thenReturn(mockResponse);

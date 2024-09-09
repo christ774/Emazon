@@ -5,6 +5,7 @@ import com.pragma.Emazon.application.handler.CategoryHandler;
 import com.pragma.Emazon.application.handler.IBrandHandler;
 import com.pragma.Emazon.application.handler.ICategoryHandler;
 import com.pragma.Emazon.application.mapper.IBrandRequestMapper;
+import com.pragma.Emazon.application.mapper.IBrandResponseMapper;
 import com.pragma.Emazon.application.mapper.ICategoryRequestMapper;
 import com.pragma.Emazon.application.mapper.ICategoryResponseMapper;
 import com.pragma.Emazon.domain.api.IBrandServicePort;
@@ -61,8 +62,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public IBrandHandler brandHandler(IBrandServicePort brandServicePort, IBrandRequestMapper brandRequestMapper) {
-        return new BrandHandler(brandServicePort, brandRequestMapper);
+    public IBrandHandler brandHandler(IBrandServicePort brandServicePort, IBrandRequestMapper brandRequestMapper, IBrandResponseMapper brandResponseMapper) {
+        return new BrandHandler(brandServicePort, brandRequestMapper,brandResponseMapper);
     }
 
 

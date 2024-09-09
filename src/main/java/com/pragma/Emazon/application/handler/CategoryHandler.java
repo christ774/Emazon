@@ -3,7 +3,7 @@ package com.pragma.Emazon.application.handler;
 import com.pragma.Emazon.application.dto.CategoryListResponse;
 import com.pragma.Emazon.application.dto.CategoryRequest;
 import com.pragma.Emazon.application.dto.CategoryResponse;
-import com.pragma.Emazon.application.dto.CategoryPaginationRequest;
+import com.pragma.Emazon.application.dto.PaginationRequest;
 import com.pragma.Emazon.application.mapper.ICategoryRequestMapper;
 
 import com.pragma.Emazon.application.mapper.ICategoryResponseMapper;
@@ -31,12 +31,12 @@ public class CategoryHandler implements ICategoryHandler{
     }
 
     @Override
-    public CategoryListResponse getAllCategories(CategoryPaginationRequest categoryPaginationRequest) {
-        List<Category> categories = categoryServicePort.getAllCategories(categoryPaginationRequest);
+    public CategoryListResponse getAllCategories(PaginationRequest paginationRequest) {
+        List<Category> categories = categoryServicePort.getAllCategories(paginationRequest);
         List<CategoryResponse> categoryResponses = categories.stream()
                 .map(categoryResponseMapper::toResponse)
                 .collect(Collectors.toList());
-        return new CategoryListResponse(categoryResponses, categoryPaginationRequest.page(), categoryPaginationRequest.size());
+        return new CategoryListResponse(categoryResponses, paginationRequest.page(), paginationRequest.size());
     }
 
 
